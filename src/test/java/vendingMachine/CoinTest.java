@@ -2,6 +2,7 @@ package vendingMachine;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.junit.After;
@@ -29,9 +30,9 @@ public class CoinTest {
 
 	@Test
 	public void testGetValues() throws Exception {
-		assertEquals(.05, Coin.NICKEL.getMonetaryValue(), 0.0);
-		assertEquals(.10, Coin.DIME.getMonetaryValue(), 0.0);
-		assertEquals(.25, Coin.QUARTER.getMonetaryValue(), 0.0);
+		assertEquals(new BigDecimal(.05), Coin.NICKEL.getMonetaryValue());
+		assertEquals(new BigDecimal(.10), Coin.DIME.getMonetaryValue());
+		assertEquals(new BigDecimal(.25), Coin.QUARTER.getMonetaryValue());
 	}
 
 	@Test

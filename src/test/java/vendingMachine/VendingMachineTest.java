@@ -25,4 +25,13 @@ public class VendingMachineTest {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
 
+	@Test
+	public void testGetDisplay_whenCoinsInserted() throws Exception {
+		vendingMachine.coinAccepted(Coin.NICKEL);
+		assertEquals("0.05", vendingMachine.getDisplay());
+		vendingMachine.coinAccepted(Coin.DIME);
+		assertEquals("0.15", vendingMachine.getDisplay());
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		assertEquals("0.40", vendingMachine.getDisplay());
+	}
 }

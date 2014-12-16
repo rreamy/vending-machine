@@ -1,23 +1,25 @@
 package vendingMachine;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 public enum Coin {
-	NICKEL(.05, 5, 21), DIME(.10, 2.2, 18), QUARTER(.25, 5.6, 24);
+	NICKEL(new BigDecimal(.05), 5, 21), DIME(new BigDecimal(.10), 2.2, 18), QUARTER(
+			new BigDecimal(.25), 5.6, 24);
 
-	private double monetaryValue;
+	private BigDecimal monetaryValue;
 	private double weightInGrams;
 	private int diameterInMillimeters;
 
-	private Coin(double monetaryValue, double weightInGrams,
+	private Coin(BigDecimal monetaryValue, double weightInGrams,
 			int diameterInMillimeters) {
 		this.monetaryValue = monetaryValue;
 		this.weightInGrams = weightInGrams;
 		this.diameterInMillimeters = diameterInMillimeters;
 	}
 
-	public double getMonetaryValue() {
+	public BigDecimal getMonetaryValue() {
 		return this.monetaryValue;
 	}
 

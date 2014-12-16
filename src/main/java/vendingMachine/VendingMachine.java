@@ -1,35 +1,67 @@
 package vendingMachine;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class VendingMachine {
 
 	public static void main(String[] args) {
 		VendingMachine vendingMachine = new VendingMachine();
 		while (true) {
-			System.out.println(vendingMachine.getDisplay());
-			vendingMachine.handleCoins();
+			try {
+				System.out.println(vendingMachine.getDisplay());
+				vendingMachine.handleCoins();
+			} catch (IOException error) {
+				System.err.println("OUT OF ORDER");
+			}
 		}
+	}
+
+	private BigDecimal total;
+
+	protected VendingMachine() {
+		total = new BigDecimal(0);
 	}
 
 	public String getDisplay() {
-		return "INSERT COIN";
+		if (total.equals(BigDecimal.ZERO)) {
+			return "INSERT COIN";
+		}
+		total = total.setScale(2, RoundingMode.DOWN);
+		return String.valueOf(total);
 	}
 
-	private void handleCoins() {
-		Scanner inputReader = new Scanner(System.in);
-		System.out.println(Coin.displayCoinWeightInformation());
-		System.out.println("Enter coin weight: ");
-		double coinWeight = inputReader.nextDouble();
+	private void handleCoins() throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(
+				System.in));
 
-		System.out.println(Coin.displayCoinDiameterInformation());
-		System.out.println("Enter coin diameter:");
-		int coinDiameter = inputReader.nextInt();
+		try {
+			System.out.println(Coin.displayCoinWeightInformation());
+			System.out.println("Enter coin weight: ");
+			double coinWeight = Double.valueOf(input.readLine());
 
-		Coin coin = Coin.determineCoin(coinWeight, coinDiameter);
-		if (coin == null) {
-			System.err.println("Coin returned.");
+			System.out.println(Coin.displayCoinDiameterInformation());
+			System.out.println("Enter coin diameter:");
+			int coinDiameter = Integer.valueOf(input.readLine());
+
+			Coin coin = Coin.determineCoin(coinWeight, coinDiameter);
+			if (coin == null) {
+				System.err.println("Coin returned.");
+			} else {
+				coinAccepted(coin);
+			}
+		} catch (NumberFormatException e) {
+			System.err.println("Invalid weight, please try again:\n");
+			input.close();
+			handleCoins();
 		}
-		// we add the value to the total and then we will display the new total
+
+	}
+
+	protected void coinAccepted(Coin coin) {
+		this.total = total.add(coin.getMonetaryValue());
 	}
 }
