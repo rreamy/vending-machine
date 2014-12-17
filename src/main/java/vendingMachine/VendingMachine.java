@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class VendingMachine {
 
@@ -30,7 +29,6 @@ public class VendingMachine {
 		if (total.equals(BigDecimal.ZERO)) {
 			return "INSERT COIN";
 		}
-		total = total.setScale(2, RoundingMode.DOWN);
 		return String.valueOf(total);
 	}
 

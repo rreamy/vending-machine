@@ -1,12 +1,14 @@
 package vendingMachine;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
 public enum Coin {
-	NICKEL(new BigDecimal(.05), 5, 21), DIME(new BigDecimal(.10), 2.2, 18), QUARTER(
-			new BigDecimal(.25), 5.6, 24);
+	NICKEL(new BigDecimal(.05).setScale(2, RoundingMode.DOWN), 5, 21), DIME(
+			new BigDecimal(.10).setScale(2, RoundingMode.DOWN), 2.2, 18), QUARTER(
+			new BigDecimal(.25).setScale(2, RoundingMode.DOWN), 5.6, 24);
 
 	private BigDecimal monetaryValue;
 	private double weightInGrams;
