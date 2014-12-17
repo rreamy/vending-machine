@@ -3,6 +3,7 @@ package vendingMachine;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import org.junit.After;
@@ -30,9 +31,12 @@ public class CoinTest {
 
 	@Test
 	public void testGetValues() throws Exception {
-		assertEquals(new BigDecimal(.05), Coin.NICKEL.getMonetaryValue());
-		assertEquals(new BigDecimal(.10), Coin.DIME.getMonetaryValue());
-		assertEquals(new BigDecimal(.25), Coin.QUARTER.getMonetaryValue());
+		assertEquals(new BigDecimal(.05).setScale(2, RoundingMode.DOWN),
+				Coin.NICKEL.getMonetaryValue());
+		assertEquals(new BigDecimal(.10).setScale(2, RoundingMode.DOWN),
+				Coin.DIME.getMonetaryValue());
+		assertEquals(new BigDecimal(.25).setScale(2, RoundingMode.DOWN),
+				Coin.QUARTER.getMonetaryValue());
 	}
 
 	@Test
@@ -41,5 +45,19 @@ public class CoinTest {
 		assertEquals(Coin.DIME, Coin.determineCoin(2.2, 18));
 		assertEquals(Coin.QUARTER, Coin.determineCoin(5.6, 24));
 		assertEquals(null, Coin.determineCoin(15, 45));
+	}
+
+	@Test
+	public void testGetWeightInGrams() throws Exception {
+		assertEquals(5, Coin.NICKEL.getWeightInGrams(), 0);
+		assertEquals(2.2, Coin.DIME.getWeightInGrams(), 0);
+		assertEquals(5.6, Coin.QUARTER.getWeightInGrams(), 0);
+	}
+
+	@Test
+	public void testGetDiameterInMillimeters() throws Exception {
+		assertEquals(21, Coin.NICKEL.getDiameterInMillimeters());
+		assertEquals(18, Coin.DIME.getDiameterInMillimeters());
+		assertEquals(24, Coin.QUARTER.getDiameterInMillimeters());
 	}
 }

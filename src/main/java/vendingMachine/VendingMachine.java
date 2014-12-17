@@ -4,24 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class VendingMachine {
 
 	public static void main(String[] args) {
 		VendingMachine vendingMachine = new VendingMachine();
+		Display display = new Display();
 		while (true) {
 			try {
 				BufferedReader input = new BufferedReader(
 						new InputStreamReader(System.in));
-				System.out.println("Select option\n");
-				System.out.println("1) Insert coins\n");
-				System.out.println("2) Select product\n");
+				System.out.println(display.displayVendingMachineOptions());
 				String selection = input.readLine();
 				if (selection.equals("1")) {
-					System.out.println(vendingMachine.getDisplay());
-					vendingMachine.handleCoins(input);
+					vendingMachine.handleCoins(input, display);
 				} else {
-					System.out.println(vendingMachine.displayProducts());
+					System.out.println(display.displayProducts());
 				}
 			} catch (IOException error) {
 				System.err.println("OUT OF ORDER");
@@ -29,31 +28,20 @@ public class VendingMachine {
 		}
 	}
 
-	private String displayProducts() {
-		return null;
-	}
-
 	private BigDecimal total;
 
 	protected VendingMachine() {
-		total = new BigDecimal(0);
+		total = new BigDecimal(0).setScale(2, RoundingMode.DOWN);
 	}
 
-	public String getDisplay() {
-		if (total.equals(BigDecimal.ZERO)) {
-			return "INSERT COIN";
-		}
-		return String.valueOf(total);
-	}
-
-	private void handleCoins(BufferedReader input) throws IOException {
+	public void handleCoins(BufferedReader input, Display display)
+			throws IOException {
+		display.displayTotal(total);
 		try {
-			System.out.println(Coin.displayCoinWeightInformation());
-			System.out.println("Enter coin weight: ");
+			System.out.println(display.displayEnterWeightMessage());
 			double coinWeight = Double.valueOf(input.readLine());
 
-			System.out.println(Coin.displayCoinDiameterInformation());
-			System.out.println("Enter coin diameter:");
+			System.out.println(display.displayEnterDiameterMessage());
 			int coinDiameter = Integer.valueOf(input.readLine());
 
 			Coin coin = Coin.determineCoin(coinWeight, coinDiameter);
@@ -65,7 +53,7 @@ public class VendingMachine {
 		} catch (NumberFormatException e) {
 			System.err.println("Invalid weight, please try again:\n");
 			input.close();
-			handleCoins(input);
+			handleCoins(input, display);
 		}
 
 	}

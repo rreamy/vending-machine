@@ -24,26 +24,15 @@ public enum Coin {
 		return this.monetaryValue;
 	}
 
-	public static String displayCoinWeightInformation() {
-		StringBuffer displayString = new StringBuffer();
-		displayString.append("Nickel weight: " + NICKEL.weightInGrams + "\n");
-		displayString.append("Dime weight: " + DIME.weightInGrams + "\n");
-		displayString.append("Quarter weight: " + QUARTER.weightInGrams + "\n");
-		return displayString.toString();
+	public double getWeightInGrams() {
+		return this.weightInGrams;
 	}
 
-	public static String displayCoinDiameterInformation() {
-		StringBuffer displayString = new StringBuffer();
-		displayString.append("Nickel diameter: " + NICKEL.diameterInMillimeters
-				+ "\n");
-		displayString.append("Dime diameter: " + DIME.diameterInMillimeters
-				+ "\n");
-		displayString.append("Quarter diameter: "
-				+ QUARTER.diameterInMillimeters + "\n");
-		return displayString.toString();
+	public int getDiameterInMillimeters() {
+		return this.diameterInMillimeters;
 	}
 
-	// for simplicities sake, assuming that there is no variation in the
+	// for simplicity's sake, assuming that there is no variation in the
 	// weight or diameter of these coins
 	public static Coin determineCoin(double weight, int diameter) {
 		List<Coin> coins = Arrays.asList(Coin.values());
