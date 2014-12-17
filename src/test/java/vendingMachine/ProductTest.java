@@ -34,4 +34,19 @@ public class ProductTest {
 				Product.CANDY.getPrice());
 	}
 
+	@Test
+	public void testGetSelectionNumber() throws Exception {
+		assertEquals(1, Product.COLA.getSelectionNumber());
+		assertEquals(2, Product.CHIPS.getSelectionNumber());
+		assertEquals(3, Product.CANDY.getSelectionNumber());
+	}
+
+	@Test
+	public void testGetProductBySelectionNumber() throws Exception {
+		assertEquals(Product.COLA, Product.getProductBySelectionNumber(1));
+		assertEquals(Product.CHIPS, Product.getProductBySelectionNumber(2));
+		assertEquals(Product.CANDY, Product.getProductBySelectionNumber(3));
+		assertEquals(null, Product.getProductBySelectionNumber(44));
+	}
+
 }

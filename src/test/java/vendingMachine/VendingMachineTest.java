@@ -90,4 +90,10 @@ public class VendingMachineTest {
 		verify(display, times(2)).displayTotal(any(BigDecimal.class));
 		verify(display, times(1)).invalidCoinInformationMessage();
 	}
+
+	@Test
+	public void testPurchaseProduct() throws Exception {
+		vendingMachine.purchaseProduct(input, display);
+		verify(display, times(1)).productDisplayMessage();
+	}
 }

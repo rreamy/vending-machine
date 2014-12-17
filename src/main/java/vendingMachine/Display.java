@@ -10,15 +10,13 @@ public class Display {
 		StringBuilder productsDisplay = new StringBuilder();
 		productsDisplay.append("Select product:\n");
 		List<Product> products = Arrays.asList(Product.values());
-		int counter = 1;
 		for (Product product : products) {
-			productsDisplay.append(counter);
+			productsDisplay.append(product.getSelectionNumber());
 			productsDisplay.append(")");
 			productsDisplay.append(product.getProductName());
 			productsDisplay.append(":\t$");
 			productsDisplay.append(product.getPrice());
 			productsDisplay.append("\n");
-			counter++;
 		}
 		return productsDisplay.toString();
 	}

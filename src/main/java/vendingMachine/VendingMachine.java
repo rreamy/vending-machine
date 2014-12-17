@@ -20,7 +20,8 @@ public class VendingMachine {
 				if (selection.equals("1")) {
 					vendingMachine.handleCoins(input, display);
 				} else {
-					System.out.println(display.productDisplayMessage());
+					vendingMachine.purchaseProduct(input, display);
+
 				}
 			} catch (IOException error) {
 				System.err.println("OUT OF ORDER");
@@ -30,8 +31,27 @@ public class VendingMachine {
 
 	private BigDecimal total;
 
-	protected VendingMachine() {
+	public VendingMachine() {
 		total = new BigDecimal(0).setScale(2, RoundingMode.DOWN);
+	}
+
+	public void purchaseProduct(BufferedReader input, Display display) {
+		System.out.println(display.productDisplayMessage());
+		try {
+			int productSelection = Integer.valueOf(input.readLine());
+
+			// get the user's selection
+			// get the associated product
+			// check to see that the user has inserted enough money
+			// if user has enough money
+			// // deduct cost of product from total
+			// // dispense product
+			// // display THANK YOU
+			// // displayTotal
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void handleCoins(BufferedReader input, Display display)
