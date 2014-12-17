@@ -11,12 +11,26 @@ public class VendingMachine {
 		VendingMachine vendingMachine = new VendingMachine();
 		while (true) {
 			try {
-				System.out.println(vendingMachine.getDisplay());
-				vendingMachine.handleCoins();
+				BufferedReader input = new BufferedReader(
+						new InputStreamReader(System.in));
+				System.out.println("Select option\n");
+				System.out.println("1) Insert coins\n");
+				System.out.println("2) Select product\n");
+				String selection = input.readLine();
+				if (selection.equals("1")) {
+					System.out.println(vendingMachine.getDisplay());
+					vendingMachine.handleCoins(input);
+				} else {
+					System.out.println(vendingMachine.displayProducts());
+				}
 			} catch (IOException error) {
 				System.err.println("OUT OF ORDER");
 			}
 		}
+	}
+
+	private String displayProducts() {
+		return null;
 	}
 
 	private BigDecimal total;
@@ -32,10 +46,7 @@ public class VendingMachine {
 		return String.valueOf(total);
 	}
 
-	private void handleCoins() throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(
-				System.in));
-
+	private void handleCoins(BufferedReader input) throws IOException {
 		try {
 			System.out.println(Coin.displayCoinWeightInformation());
 			System.out.println("Enter coin weight: ");
@@ -54,7 +65,7 @@ public class VendingMachine {
 		} catch (NumberFormatException e) {
 			System.err.println("Invalid weight, please try again:\n");
 			input.close();
-			handleCoins();
+			handleCoins(input);
 		}
 
 	}

@@ -6,9 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Coin {
-	NICKEL(new BigDecimal(.05).setScale(2, RoundingMode.DOWN), 5, 21), DIME(
-			new BigDecimal(.10).setScale(2, RoundingMode.DOWN), 2.2, 18), QUARTER(
-			new BigDecimal(.25).setScale(2, RoundingMode.DOWN), 5.6, 24);
+	NICKEL(new BigDecimal(.05), 5, 21), DIME(new BigDecimal(.10), 2.2, 18), QUARTER(
+			new BigDecimal(.25), 5.6, 24);
 
 	private BigDecimal monetaryValue;
 	private double weightInGrams;
@@ -16,7 +15,7 @@ public enum Coin {
 
 	private Coin(BigDecimal monetaryValue, double weightInGrams,
 			int diameterInMillimeters) {
-		this.monetaryValue = monetaryValue;
+		this.monetaryValue = monetaryValue.setScale(2, RoundingMode.DOWN);
 		this.weightInGrams = weightInGrams;
 		this.diameterInMillimeters = diameterInMillimeters;
 	}
