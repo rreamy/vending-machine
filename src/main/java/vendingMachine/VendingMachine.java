@@ -15,12 +15,12 @@ public class VendingMachine {
 			try {
 				BufferedReader input = new BufferedReader(
 						new InputStreamReader(System.in));
-				System.out.println(display.displayVendingMachineOptions());
+				System.out.println(display.vendingMachineOptionsMessage());
 				String selection = input.readLine();
 				if (selection.equals("1")) {
 					vendingMachine.handleCoins(input, display);
 				} else {
-					System.out.println(display.displayProducts());
+					System.out.println(display.productDisplayMessage());
 				}
 			} catch (IOException error) {
 				System.err.println("OUT OF ORDER");
@@ -38,20 +38,20 @@ public class VendingMachine {
 			throws IOException {
 		display.displayTotal(total);
 		try {
-			System.out.println(display.displayEnterWeightMessage());
+			System.out.println(display.enterWeightMessage());
 			double coinWeight = Double.valueOf(input.readLine());
 
-			System.out.println(display.displayEnterDiameterMessage());
+			System.out.println(display.enterDiameterMessage());
 			int coinDiameter = Integer.valueOf(input.readLine());
 
 			Coin coin = Coin.determineCoin(coinWeight, coinDiameter);
 			if (coin == null) {
-				System.err.println("Coin returned.");
+				System.err.println(display.coinReturnedMessage());
 			} else {
 				coinAccepted(coin);
 			}
 		} catch (NumberFormatException e) {
-			System.err.println("Invalid weight, please try again:\n");
+			System.err.println(display.invalidCoinInformationMessage());
 			input.close();
 			handleCoins(input, display);
 		}

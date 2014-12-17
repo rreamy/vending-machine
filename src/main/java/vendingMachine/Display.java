@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Display {
 
-	public String displayProducts() {
+	public String productDisplayMessage() {
 		StringBuilder productsDisplay = new StringBuilder();
 		productsDisplay.append("Select product:\n");
 		List<Product> products = Arrays.asList(Product.values());
@@ -23,7 +23,7 @@ public class Display {
 		return productsDisplay.toString();
 	}
 
-	public String displayVendingMachineOptions() {
+	public String vendingMachineOptionsMessage() {
 		StringBuilder display = new StringBuilder();
 		display.append("Select option:\n");
 		display.append("1) Insert coins\n");
@@ -31,7 +31,7 @@ public class Display {
 		return display.toString();
 	}
 
-	public String displayEnterWeightMessage() {
+	public String enterWeightMessage() {
 		StringBuilder displayString = new StringBuilder();
 		displayString.append("Nickel weight: ");
 		displayString.append(Coin.NICKEL.getWeightInGrams());
@@ -46,7 +46,7 @@ public class Display {
 		return displayString.toString();
 	}
 
-	public String displayEnterDiameterMessage() {
+	public String enterDiameterMessage() {
 		StringBuilder displayString = new StringBuilder();
 		displayString.append("Nickel diameter: ");
 		displayString.append(Coin.NICKEL.getDiameterInMillimeters());
@@ -61,8 +61,12 @@ public class Display {
 		return displayString.toString();
 	}
 
-	public String displayCoinReturnedMessage() {
-		return null;
+	public String coinReturnedMessage() {
+		return "Coin returned.\n";
+	}
+
+	public String invalidCoinInformationMessage() {
+		return "Invalid value, please try again:\n";
 	}
 
 	public String displayTotal(BigDecimal total) {

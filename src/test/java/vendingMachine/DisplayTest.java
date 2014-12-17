@@ -23,41 +23,52 @@ public class DisplayTest {
 	}
 
 	@Test
-	public void testDisplayProducts() {
+	public void testProductDisplayMessage() {
 		assertEquals(
 				"Select product:\n1)Cola:\t$1.00\n2)Chips:\t$0.50\n3)Candy:\t$0.65\n",
-				display.displayProducts());
+				display.productDisplayMessage());
 	}
 
 	@Test
-	public void testDisplayVendingMachineOptions() throws Exception {
+	public void testVendingMachineOptionsMessage() throws Exception {
 		assertEquals("Select option:\n1) Insert coins\n2) Select product\n",
-				display.displayVendingMachineOptions());
+				display.vendingMachineOptionsMessage());
 	}
 
 	@Test
-	public void testGetDisplay_whenNoCoinsInserted() {
+	public void testDisplayTotal_whenNoCoinsInserted() {
 		assertEquals("INSERT COIN", display.displayTotal(BigDecimal.ZERO));
 	}
 
 	@Test
-	public void testGetDisplay_whenCoinsInserted() throws Exception {
+	public void testDisplayTotal_whenCoinsInserted() throws Exception {
 		assertEquals("$0.05", display.displayTotal(new BigDecimal(".05")));
 		assertEquals("$0.15", display.displayTotal(new BigDecimal(".15")));
 		assertEquals("$0.40", display.displayTotal(new BigDecimal(".40")));
 	}
 
 	@Test
-	public void testDisplayEnterWeightMessage() throws Exception {
+	public void testEnterWeightMessage() throws Exception {
 		assertEquals(
 				"Nickel weight: 5.0\nDime weight: 2.2\nQuarter weight: 5.6\nEnter coin weight:\n",
-				display.displayEnterWeightMessage());
+				display.enterWeightMessage());
 	}
 
 	@Test
-	public void testDisplayEnterDiameterMessage() throws Exception {
+	public void testEnterDiameterMessage() throws Exception {
 		assertEquals(
 				"Nickel diameter: 21\nDime diameter: 18\nQuarter diameter: 24\nEnter coin diameter:\n",
-				display.displayEnterDiameterMessage());
+				display.enterDiameterMessage());
+	}
+
+	@Test
+	public void testCoinReturnedMessage() throws Exception {
+		assertEquals("Coin returned.\n", display.coinReturnedMessage());
+	}
+
+	@Test
+	public void testInvalidCoinInformationMessage() throws Exception {
+		assertEquals("Invalid value, please try again:\n",
+				display.invalidCoinInformationMessage());
 	}
 }
