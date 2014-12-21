@@ -74,4 +74,12 @@ public class Display {
 		String totalString = String.valueOf(total);
 		return "$" + totalString;
 	}
+
+	public String dispenseProductMessage(Product product) {
+		StringBuilder displayString = new StringBuilder();
+		displayString.append(product.getProductName());
+		displayString.append(" dispensed\n");
+		displayString.append("THANK YOU\n");
+		return displayString.toString();
+	}
 }

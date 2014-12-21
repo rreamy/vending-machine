@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.junit.After;
 import org.junit.Before;
@@ -93,7 +94,18 @@ public class VendingMachineTest {
 
 	@Test
 	public void testPurchaseProduct() throws Exception {
+		when(input.readLine()).thenReturn("1");
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		vendingMachine.coinAccepted(Coin.QUARTER);
+
 		vendingMachine.purchaseProduct(input, display);
+
 		verify(display, times(1)).productDisplayMessage();
+		verify(display, times(1)).dispenseProductMessage(Product.COLA);
+		verify(display, times(1)).displayTotal(
+				BigDecimal.ZERO.setScale(2, RoundingMode.DOWN));
 	}
+
 }

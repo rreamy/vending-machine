@@ -39,18 +39,18 @@ public class VendingMachine {
 		System.out.println(display.productDisplayMessage());
 		try {
 			int productSelection = Integer.valueOf(input.readLine());
-
-			// get the user's selection
-			// get the associated product
-			// check to see that the user has inserted enough money
-			// if user has enough money
-			// // deduct cost of product from total
-			// // dispense product
-			// // display THANK YOU
-			// // displayTotal
+			Product product = Product
+					.getProductBySelectionNumber(productSelection);
+			if (product != null) {
+				if (total.compareTo(product.getPrice()) >= 0) {
+					total = total.subtract(product.getPrice());
+					System.out.println(display.dispenseProductMessage(product));
+					System.out.println(display.displayTotal(total));
+				}
+			}
 		} catch (NumberFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Invalid selection...please try again.\n");
+			purchaseProduct(input, display);
 		}
 	}
 

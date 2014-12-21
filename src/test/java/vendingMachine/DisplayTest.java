@@ -71,4 +71,14 @@ public class DisplayTest {
 		assertEquals("Invalid value, please try again:\n",
 				display.invalidCoinInformationMessage());
 	}
+
+	@Test
+	public void testDispenseProductMessage() throws Exception {
+		assertEquals("Cola dispensed\nTHANK YOU\n",
+				display.dispenseProductMessage(Product.COLA));
+		assertEquals("Chips dispensed\nTHANK YOU\n",
+				display.dispenseProductMessage(Product.CHIPS));
+		assertEquals("Candy dispensed\nTHANK YOU\n",
+				display.dispenseProductMessage(Product.CANDY));
+	}
 }
