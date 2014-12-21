@@ -108,4 +108,18 @@ public class VendingMachineTest {
 				BigDecimal.ZERO.setScale(2, RoundingMode.DOWN));
 	}
 
+	@Test
+	public void testPurchaseProduct_insufficentFunds() throws Exception {
+		when(input.readLine()).thenReturn("1");
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		vendingMachine.coinAccepted(Coin.QUARTER);
+		vendingMachine.coinAccepted(Coin.QUARTER);
+
+		vendingMachine.purchaseProduct(input, display);
+
+		verify(display, times(1)).productDisplayMessage();
+		verify(display, times(0)).dispenseProductMessage(Product.COLA);
+		verify(display, times(1)).displayPrice(Product.COLA);
+	}
+
 }

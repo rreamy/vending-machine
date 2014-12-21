@@ -81,4 +81,11 @@ public class DisplayTest {
 		assertEquals("Candy dispensed\nTHANK YOU\n",
 				display.dispenseProductMessage(Product.CANDY));
 	}
+
+	@Test
+	public void testDisplayPrice() throws Exception {
+		assertEquals("PRICE $1.00\n", display.displayPrice(Product.COLA));
+		assertEquals("PRICE $0.50\n", display.displayPrice(Product.CHIPS));
+		assertEquals("PRICE $0.65\n", display.displayPrice(Product.CANDY));
+	}
 }

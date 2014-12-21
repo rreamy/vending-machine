@@ -46,6 +46,8 @@ public class VendingMachine {
 					total = total.subtract(product.getPrice());
 					System.out.println(display.dispenseProductMessage(product));
 					System.out.println(display.displayTotal(total));
+				} else {
+					System.out.println(display.displayPrice(product));
 				}
 			}
 		} catch (NumberFormatException | IOException e) {

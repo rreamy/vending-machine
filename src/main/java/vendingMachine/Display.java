@@ -82,4 +82,8 @@ public class Display {
 		displayString.append("THANK YOU\n");
 		return displayString.toString();
 	}
+
+	public String displayPrice(Product product) {
+		return "PRICE $" + product.getPrice() + "\n";
+	}
 }
